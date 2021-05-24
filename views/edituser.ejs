@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: 'Edit Profile'}) %>
+    <style>
+        .Absolute-Center {
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        .Absolute-Center.is-Responsive {
+            width: 50%;
+            height: 50%;
+            min-width: 200px;
+            max-width: 400px;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+<%- include('partials/header', {header: 'Edit Profile'}) %>
+<div class="container">
+    <div class="row">
+        <div class="Absolute-Center is-Responsive">
+            <div class="col-sm-12 col-md-10 col-md-offset-1">
+                <form method="POST" id="loginForm">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input class="form-control" value="<%= username %>" type="text" name='username' placeholder="Enter Username" disabled="disabled" required/>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input class="form-control" value="<%= name %>" type="text" name='name' placeholder="Enter Full name" required/>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input class="form-control" value="<%= email %>" type="email" name='email' placeholder="Enter Email"
+                               required/>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input class="form-control" value="<%= age %>" type="number" name='age' placeholder="Enter Age" required/>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input class="form-control" value="<%= website %>" type="url" name='website' placeholder="Enter Website"/>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input class="form-control" value="<%= location %>" type="text" name='location' placeholder="Enter Location"/>
+                    </div>
+                    <p style="text-align: center"><a href="/users/reset">Change password</a></p>
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-md-4">
+                            <button type="submit" class="btn btn-def btn-block">Save</button>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <button type="button" class="btn btn-def btn-block" onclick="location='/'">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

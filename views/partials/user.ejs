@@ -1,0 +1,11 @@
+<tr>
+    <td id="username" />
+     <% if (admin) { %>
+       <td id="password" />
+       <td id="admin" class="text-center" />
+    <% } %>
+    <td id="name" />
+    <% if (admin) { %>
+        <td class="text-center" title='delete user' onclick="remove($(this).parent());"><img src="/images/glyphicons-8-user-remove.png"></img></td>
+    <% } %>
+</tr>

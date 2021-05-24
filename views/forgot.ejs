@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: "Reset password"}) %>
+    <style>
+        .Absolute-Center {
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        .Absolute-Center.is-Responsive {
+            width: 50%;
+            height: 50%;
+            min-width: 200px;
+            max-width: 400px;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+<%- include('partials/header', {header: 'Reset password'}) %>
+<div class="container">
+    <div class="row">
+        <div class="Absolute-Center is-Responsive">
+            <% if(message) { %>
+            <div class="alert alert-primary" role="alert">
+                <%= message %>
+            </div>
+            <% } %>
+            <div class="col-sm-12 col-md-10 col-md-offset-1">
+                <form method="POST">
+                    <legend>Forgot Password</legend>
+                    <p>Please enter your email</p>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input class="form-control" type="email" autofocus="autofocus" name='email'
+                               placeholder="Enter Email" required/>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Reset Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: title}) %>
+    <script>
+        async function remove($row) {
+            <% if (admin) { %>
+            user = $($row).find('#username').text();
+            if (confirm("Do you really want to delete user '" + user + "'?")) {
+                try {
+                    await fetch(`/users/${user}`, {method: 'DELETE', credentials: 'same-origin'});
+                } catch (err) {
+                    console.error(er);
+                }
+                location = "/users";
+            }
+            <% } %>
+        }
+
+        async function buildRows() {
+            let users = [];
+            $tbody = $("#tbody");
+            try {
+                users =  await (await fetch(`/users/list`, {credentials: 'same-origin'})).json();
+            } catch (err) {
+                console.error(er);
+            }
+            let template = $($('#row-template').html());
+            users.forEach(user => {
+                $row = template.clone();
+                $row.find("#username").text(user.username);
+                $row.find("#name").text(user.name);
+                <% if (admin) { %>
+                $row.find("#password").text(user.password);
+                $row.find("#admin").text(user.admin);
+                <% } %>
+                $row.appendTo($tbody);
+            });
+        }
+        $(() => {
+            buildRows();
+        });
+    </script>
+</head>
+<body>
+<%- include('partials/header', {header: 'Users'}) %>
+<table class="table table-hover">
+    <thead class="thead-inverse">
+    <tr>
+        <th>User</th>
+        <% if (admin) { %>
+            <th>Password</th>
+            <th class="text-center">Admin</th>
+        <% } %>
+        <th>Name</th>
+        <% if (admin) { %>
+            <th class="text-center"></th>
+        <% } %>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+        <script id="row-template" type="text/x-custom-template"><%- include('partials/user', {admin: admin} ) %></script>
+    </tbody>
+</table>
+<p>
+    <button onclick="location = '/users/add'">Add user</button>
+</p>
+<p>
+    <button onclick="location = '/logout'">Logout</button>
+</p>
+<p>
+    <button onclick="location = '/'">Home</button>
+</p>
+</body>
+</html>

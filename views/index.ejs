@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/head', {title: title}) %>
+  </head>
+  <body>
+    <%- include('partials/header', {header: title}) %>
+    <p>Welcome to <%= title %></p>
+    <p>User: <%= userName %></p>
+    <p>Times here: <%= count %></p>
+    <p><button onclick="location = '/logout'">Logout</button></p>
+    <p><button onclick="location = '/users'">Users</button></p>
+    <p><button onclick="location = '/users/edit'">Edit Profile</button></p>
+  </body>
+</html>
