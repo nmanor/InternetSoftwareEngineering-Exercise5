@@ -6,6 +6,7 @@ const passport = require('passport');
 const flash = require('express-flash');
 const async = require('async');
 const crypto = require('crypto');
+const CryptoJS = require('crypto-js');
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 const LocalStrategy = require('passport-local').Strategy
@@ -131,7 +132,8 @@ router.post('/forgot', function (req, res, next) {
             User.findOne({email: req.body.email}, function (err, user) {
                 if (!user) {
                     req.flash('error', 'No account with that email address exists.');
-                    return res.redirect('/forgot');
+                    res.redirect('/login/forgot');
+                    return
                 }
 
                 user.resetPasswordToken = token;
@@ -157,7 +159,7 @@ router.post('/forgot', function (req, res, next) {
                 subject: 'Reset your site password',
                 text: 'Dear ' + user.name + ',\nThere was a recent request to change the password for your account.\n' +
                     'If you are interested in changing this password, please click on the following link:\n' +
-                    'http://' + req.headers.host + '/login/reset/' + token + '\n\n' +
+                    'https://' + req.headers.host + '/login/reset/' + token + '\n\n' +
                     'If clicking the link does not work, please copy and paste the URL into your browser.\n' +
                     'If you do not request it, please ignore this message and your password will remain the same.\n' +
                     'For your attention, this link will be available only for the next hour.'
